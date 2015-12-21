@@ -40,4 +40,8 @@ public class Task {
 		this.solutions = solutions;
 	}
 	
+	public void addSolution(Solution solution) {
+		this.addSolution(solution);
+	}
+	
 }

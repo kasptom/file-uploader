@@ -43,7 +43,8 @@ public class User {
 	public void setSolutions(Set<Solution> solutions) {
 		this.solutions = solutions;
 	}
-
 	
-	
+	public void addSolution(Solution solution) {
+		this.solutions.add(solution);
+	}
 }

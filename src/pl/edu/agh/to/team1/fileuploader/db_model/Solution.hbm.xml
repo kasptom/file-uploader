@@ -13,7 +13,7 @@
         <property name="addedDate" type="date"/>
         <property name="expDate" type="date"/>
         <property name="assesedDate" type="date"/>
-        <property name="result" type="integer"/>
+        <property name="result" type="real"/>
         <property name="resultType" type="text"/>
         
         <many-to-one name="user"
