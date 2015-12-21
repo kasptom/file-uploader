@@ -6,15 +6,15 @@
 <hibernate-configuration>
 	<session-factory>
 		<!-- Database connection settings -->
-		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<!--<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="connection.url">jdbc:mysql://localhost:3306/fileuploader</property>
 		<property name="connection.username">root</property>
-		<property name="connection.password"></property>
+		<property name="connection.password"></property>-->
 		
-		<!--<property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
-		<property name="connection.url">jdbc:hsqldb:file:db/htmlindex</property>
+		<property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
+		<property name="connection.url">jdbc:hsqldb:file:db/fileuploader</property>
 		<property name="connection.username">root</property>
-		<property name="connection.password"></property>-->		
+		<property name="connection.password"></property>		
 
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">false</property>
@@ -23,9 +23,9 @@
 		<property name="hbm2ddl.auto">create</property>
 		
 		<!-- Mappings -->
-		<mapping resource="pl/edu/agh/ki/bd/htmlIndexer/model/Sentence.hbm.xml" />
-		<mapping resource="pl/edu/agh/ki/bd/htmlIndexer/model/ProcessedUrl.hbm.xml" />
-		<mapping resource="pl/edu/agh/ki/bd/htmlIndexer/model/Word.hbm.xml" />
+		<mapping resource="pl/edu/agh/to/team1/fileuploader/db_model/Solution.hbm.xml" />
+		<mapping resource="pl/edu/agh/to/team1/fileuploader/db_model/Task.hbm.xml" />
+		<mapping resource="pl/edu/agh/to/team1/fileuploader/db_model/User.hbm.xml" />
 </session-factory>
 </hibernate-configuration>
 

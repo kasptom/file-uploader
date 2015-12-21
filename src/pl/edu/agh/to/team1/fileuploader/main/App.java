@@ -1,10 +1,40 @@
 package pl.edu.agh.to.team1.fileuploader.main;
 
-public class App {
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
-	public static void main(String[] args) {
-		//TODO
-		//run SocketListener thread
+import pl.edu.agh.to.team1.fileuploader.server.SocketListener;
+import pl.edu.agh.to.team1.fileuploader.persistence.HibernateUtils;
+
+public class App{
+	public static void main(String[] args) throws IOException {
+		HibernateUtils.getSession().close();
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+		SocketListener socketListener = new SocketListener("localhost");
+		socketListener.start();
+		
+		
+		while(true){
+			System.out.println("FileUploader server [? for help] > :");
+			String command = bufferedReader.readLine();
+			if (command.startsWith("?"))
+			{
+				System.out.println("'?'      	- print this help");
+				System.out.println("'x'      	- exit FileUploader");
+			}
+			else if (command.startsWith("x"))
+			{
+				System.out.print("Disconnecting from database...");
+				HibernateUtils.shutdown();
+				System.out.println(" done");
+				System.out.print("Shutting down socets...");
+				socketListener.shutdown();
+				System.out.println(" done");
+				System.out.println("FileUploader terminated.");
+				break;				
+			}
+		}
 	}
 
 }
