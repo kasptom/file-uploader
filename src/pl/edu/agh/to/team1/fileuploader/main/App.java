@@ -28,7 +28,7 @@ public class App{
 				System.out.print("Disconnecting from database...");
 				HibernateUtils.shutdown();
 				System.out.println(" done");
-				System.out.print("Shutting down socets...");
+				System.out.print("Shutting down sockets...");
 				socketListener.shutdown();
 				System.out.println(" done");
 				System.out.println("FileUploader terminated.");
