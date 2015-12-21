@@ -11,7 +11,7 @@
         </id>
         <property name="name" type="text"/>
         <property name="deadline" type="date"/>
-        <property name="maxScore" type="real"/>
+        <property name="maxScore" type="double"/>
         
         <set name="solutions" inverse="true">
         	<key column="taskId"/>
