@@ -1,6 +1,7 @@
 package pl.edu.agh.to.team1.fileuploader.json_transformer;
 
 import java.io.File;
+import java.io.OutputStream;
 
 public abstract class JSONTransformer {
 	
@@ -17,6 +18,10 @@ public abstract class JSONTransformer {
 	 * received via socket
 	 */
 	public void unwrap(File jsonFile){
+		return;
+	}
+	
+	public void process(OutputStream stream){
 		return;
 	}
 }
