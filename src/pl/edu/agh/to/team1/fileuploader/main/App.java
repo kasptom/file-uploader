@@ -4,16 +4,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import pl.edu.agh.to.team1.fileuploader.server.SocketListener;
+import pl.edu.agh.to.team1.fileuploader.server.TestClient;
+import pl.edu.agh.to.team1.fileuploader.server.WebSocketServer;
 import pl.edu.agh.to.team1.fileuploader.persistence.HibernateUtils;
 
 public class App{
 	public static void main(String[] args) throws IOException {
 		HibernateUtils.getSession().close();
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-		SocketListener socketListener = new SocketListener("localhost");
-		socketListener.start();
-		
+		WebSocketServer webSocketServer = new WebSocketServer();
+		webSocketServer.start();
+		TestClient client = new TestClient();
+		client.start();
 		
 		while(true){
 			System.out.println("FileUploader server [? for help] > :");
@@ -25,11 +27,12 @@ public class App{
 			}
 			else if (command.startsWith("x"))
 			{
+				
 				System.out.print("Disconnecting from database...");
 				HibernateUtils.shutdown();
 				System.out.println(" done");
 				System.out.print("Shutting down sockets...");
-				socketListener.shutdown();
+				webSocketServer.shutdown();
 				System.out.println(" done");
 				System.out.println("FileUploader terminated.");
 				break;				

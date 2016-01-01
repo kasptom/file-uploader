@@ -1,0 +1,31 @@
+package pl.edu.agh.to.team1.fileuploader.client_test;
+
+import javax.websocket.*;
+
+import java.io.IOException;
+import java.net.URI;
+
+@ClientEndpoint
+public class WebSocketClient {
+	private final String uri="ws://localhost:8080";
+		   private Session session;
+
+		   @OnOpen
+		   public void onOpen(Session session){
+		      this.session=session;
+		      System.out.println("Session: " + session.getId() + " opened.");
+		   }
+
+		   @OnMessage
+		   public void onMessage(String message, Session session){
+		      System.out.println("Client received: " +message);
+		   }
+
+		   public void sendMessage(String message){
+		      try {
+		         session.getBasicRemote().sendText(message);
+		      } catch (IOException ex) {
+		    	  ex.printStackTrace();
+		      }
+		   }
+}
