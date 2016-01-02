@@ -10,6 +10,7 @@ import pl.edu.agh.to.team1.fileuploader.persistence.HibernateUtils;
 
 public class App{
 	public static void main(String[] args) throws IOException {
+		App app = new App();
 		HibernateUtils.getSession().close();
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		WebSocketServer webSocketServer = new WebSocketServer();
@@ -33,6 +34,14 @@ public class App{
 				System.out.println(" done");
 				System.out.print("Shutting down sockets...");
 				webSocketServer.shutdown();
+				
+				if(webSocketServer != null){
+					try {
+						webSocketServer.join();
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
 				System.out.println(" done");
 				System.out.println("FileUploader terminated.");
 				break;				
