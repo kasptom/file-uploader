@@ -1,6 +1,8 @@
 package pl.edu.agh.to.team1.fileuploader.server;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -15,6 +17,7 @@ import org.glassfish.tyrus.client.ClientManager;
 public class TestClient extends Thread {
     private CountDownLatch messageLatch;
     private static final String SENT_MESSAGE = "Hello World";
+    ByteBuffer stream = ByteBuffer.wrap(SENT_MESSAGE.getBytes(StandardCharsets.UTF_8));
 
     public void run(){
         try {
@@ -33,7 +36,8 @@ public class TestClient extends Thread {
                                 messageLatch.countDown();
                             }
                         });
-                        session.getBasicRemote().sendText(SENT_MESSAGE);
+                        //session.getBasicRemote().sendText(SENT_MESSAGE);
+                        session.getBasicRemote().sendBinary(stream);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

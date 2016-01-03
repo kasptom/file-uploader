@@ -1,5 +1,7 @@
 package pl.edu.agh.to.team1.fileuploader.server;
 
+import java.io.InputStream;
+
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
 import javax.websocket.OnMessage;
@@ -18,17 +20,17 @@ public class ServerEndpointAnnotated {
 		System.out.println("SERVER: Web Socket server opened.");
 	}
 	
-	@OnMessage
+	/*@OnMessage
     public String onMessage(String message, Session session) {
 		System.out.println("SERVER: received message: "+ message +", from: "+session.getId());
         return message;
-    }
+    }*/
 	
-	/*@OnMessage
+	@OnMessage
 	public void handleMessage(InputStream stream, Session session) {
 		System.out.println("SERVER: received message: "+ stream.toString());
-		fileManager.handleFile(stream, "test_file.json");
-	}*/
+		fileManager.handleFile(stream, "test.json");
+	}
 	@OnError
 	public void onError(Throwable t){
 		t.printStackTrace();

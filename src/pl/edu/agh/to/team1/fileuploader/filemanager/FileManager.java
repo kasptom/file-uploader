@@ -19,13 +19,26 @@ public class FileManager {
 	
 	public void handleFile(InputStream stream, String fileName){
 		try {
-			outputStream = new FileOutputStream(new File("/TMP/file/"));
+			File file =  new File("TMP/" + fileName);
+			boolean append = true;
+			file.getParentFile().mkdirs();
+			if(!file.exists()){
+				file.createNewFile();
+				System.out.println("Created file: " + file.getAbsolutePath());
+			}else{
+				System.out.println("File: " + file.getAbsolutePath() + " already exists");
+			}
+			
+			outputStream = new FileOutputStream(file, append);
+			
 			int read = 0;
 			byte[] bytes = new byte[1024];
 
 			while ((read = stream.read(bytes)) != -1) {
 				outputStream.write(bytes, 0, read);
 			}
+		//	outputStream.flush();
+		//	outputStream.close();
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
