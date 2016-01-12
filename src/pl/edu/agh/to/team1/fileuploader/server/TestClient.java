@@ -42,7 +42,28 @@ public class TestClient extends Thread {
                         e.printStackTrace();
                     }
                 }
-            }, cec, new URI("ws://localhost:8025/file-uploader/file-server"));
+            }, cec, new URI("ws://localhost:8025/file-uploader/compiler"));
+            //messageLatch.await(100, TimeUnit.SECONDS);
+            
+            client.connectToServer(new Endpoint() {
+
+                @Override
+                public void onOpen(Session session, EndpointConfig config) {
+                    try {
+                        session.addMessageHandler(new MessageHandler.Whole<String>() {
+                            @Override
+                            public void onMessage(String message) {
+                                System.out.println("Received message: "+message);
+                                messageLatch.countDown();
+                            }
+                        });
+                        //session.getBasicRemote().sendText(SENT_MESSAGE);
+                        session.getBasicRemote().sendBinary(stream);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, cec, new URI("ws://localhost:8026/file-uploader/user-and-stats"));
             messageLatch.await(100, TimeUnit.SECONDS);
         } catch (Exception e) {
             e.printStackTrace();
