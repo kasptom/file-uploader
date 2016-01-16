@@ -1,10 +1,38 @@
 package pl.edu.agh.to.team1.fileuploader.json_transformer;
+import java.io.IOException;
+import java.io.InputStream;
 
+import org.apache.commons.io.IOUtils;
 
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
+import pl.edu.agh.to.team1.fileuploader.db.DBManager;
 
+  
 
 public class JSONCompiler extends JSONTransformer{
-
+	private JSONUserAndStats jsonUserAndStats = new JSONUserAndStats();
+	private DBManager dbManager = new DBManager();
+	
+	public void handleStream(InputStream inputStream){
+		//create JSONObject from stream
+		
+		try {
+			String jsonTxt = IOUtils.toString(inputStream);
+			JSONObject json = (JSONObject) JSONSerializer.toJSON(jsonTxt);
+			//extract data from compiler
+			String solutionId = json.getString("solution_id");
+			String resultType = json.getString("result_type");
+			double resultValue = json.getDouble("result_value");
+			//process data
+			//save result in database
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
 
 /*

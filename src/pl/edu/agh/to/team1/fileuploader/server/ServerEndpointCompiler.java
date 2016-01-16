@@ -1,6 +1,7 @@
 package pl.edu.agh.to.team1.fileuploader.server;
 
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -10,10 +11,11 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
 import pl.edu.agh.to.team1.fileuploader.filemanager.FileManager;
+import pl.edu.agh.to.team1.fileuploader.json_transformer.JSONCompiler;
 
 @ServerEndpoint(value = "/compiler")
 public class ServerEndpointCompiler {
-	FileManager fileManager = new FileManager();
+	JSONCompiler jsonCompiler = new JSONCompiler();
 	
 	@OnOpen
 	public void onOpen(Session session) {
@@ -29,7 +31,9 @@ public class ServerEndpointCompiler {
 	@OnMessage
 	public void handleMessage(InputStream stream, Session session) {
 		System.out.println("COMPILER ENDPOINT: received message: "+ stream.toString());
-		fileManager.handleFile(stream, "compiler.json");
+		jsonCompiler.handleStream(stream);
+		
+		//fileManager.handleFile(stream, "compiler.json");
 	}
 	@OnError
 	public void onError(Throwable t){
