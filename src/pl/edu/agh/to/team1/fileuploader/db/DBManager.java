@@ -16,6 +16,7 @@ import pl.edu.agh.to.team1.fileuploader.db_model.User;
  */
 public class DBManager {
 	
+	@SuppressWarnings("unused")
 	private void saveFile(String filePath, User user, Task task) {
 		
 		HibernateUtils.getSession().close();
@@ -37,6 +38,7 @@ public class DBManager {
 		session.close();
 	}
 	
+	@SuppressWarnings("unused")
 	private void saveResultOfTask(Solution solution, double result, String resultType) {
 		HibernateUtils.getSession().close();
 		
@@ -53,6 +55,7 @@ public class DBManager {
 		
 	}
 	
+	@SuppressWarnings({ "unused", "unchecked" })
 	private List<Double> getResultOfTask(long taskId) {
 		HibernateUtils.getSession().close();
 		

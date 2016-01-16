@@ -11,9 +11,12 @@ import pl.edu.agh.to.team1.fileuploader.db.DBManager;
   
 
 public class JSONCompiler extends JSONTransformer{
+	@SuppressWarnings("unused")
 	private JSONUserAndStats jsonUserAndStats = new JSONUserAndStats();
+	@SuppressWarnings("unused")
 	private DBManager dbManager = new DBManager();
 	
+	@SuppressWarnings("unused")
 	public void handleStream(InputStream inputStream){
 		//create JSONObject from stream
 		

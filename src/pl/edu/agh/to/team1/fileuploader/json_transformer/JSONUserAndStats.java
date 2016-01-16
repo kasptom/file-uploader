@@ -1,8 +1,6 @@
 package pl.edu.agh.to.team1.fileuploader.json_transformer;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
@@ -20,6 +18,7 @@ public class JSONUserAndStats extends JSONTransformer {
 	private CompilerClient compilerClient = new CompilerClient();
 	
 	
+	@SuppressWarnings("unused")
 	public void handleStream(InputStream inputStream){
 		//create JSONObject from stream
 		
@@ -53,6 +52,7 @@ public class JSONUserAndStats extends JSONTransformer {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private JSONObject createJSONFromCompiler(long userID, String solutionID, long taskNumber,String resultType, double resultValue){
 		JSONObject obj = new JSONObject();
 		obj.put("user_id", userID);

@@ -3,10 +3,10 @@ package pl.edu.agh.to.team1.fileuploader.client_test;
 import javax.websocket.*;
 
 import java.io.IOException;
-import java.net.URI;
 
 @ClientEndpoint
 public class WebSocketClient {
+	@SuppressWarnings("unused")
 	private final String uri="ws://localhost:8080";
 		   private Session session;
 

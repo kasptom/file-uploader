@@ -14,7 +14,7 @@ import pl.edu.agh.to.team1.fileuploader.json_transformer.JSONUserAndStats;
 
 @ServerEndpoint(value = "/user-and-stats")
 public class ServerEndpointUserAndStats {
-	//FileManager fileManager = new FileManager();
+	FileManager fileManager = new FileManager();
 	JSONUserAndStats jsonUserAndStats = new JSONUserAndStats();
 	
 	@OnOpen
@@ -30,10 +30,8 @@ public class ServerEndpointUserAndStats {
 	
 	@OnMessage
 	public void handleMessage(InputStream stream, Session session) {
-		System.out.println("USER AND STATS ENDPOINT: received message: "+ stream.toString());
-		
-		
-		//fileManager.handleFile(stream, "user-file.json");
+		System.out.println("USER AND STATS ENDPOINT: received message: "+ stream.toString());	
+		fileManager.handleFile(stream, "user-test-file.json");
 	}
 	@OnError
 	public void onError(Throwable t){

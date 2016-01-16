@@ -1,15 +1,15 @@
 package pl.edu.agh.to.team1.fileuploader.server;
 
-import java.io.IOException;
+/*import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import pl.edu.agh.to.team1.fileuploader.json_transformer.*;
+import pl.edu.agh.to.team1.fileuploader.json_transformer.*;*/
 
 public class SocketListener extends Thread{
 	
-	private volatile boolean done = false;
+	/*private volatile boolean done = false;
 	private final String hostName;
 	private int userStatPort = 2001;
 	private int compilerPort = 2003;
@@ -37,6 +37,8 @@ public class SocketListener extends Thread{
 			}
 		}catch(IOException e){
 			
+		}finally{
+			
 		}
 		return;
 
@@ -48,5 +50,5 @@ public class SocketListener extends Thread{
 	}
 	public void shutdown(){
 		this.done = true;
-	}
+	}*/
 }
