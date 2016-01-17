@@ -27,10 +27,10 @@ public class JSONUserAndStats extends JSONTransformer {
 			JSONObject json = (JSONObject) JSONSerializer.toJSON(jsonTxt);
 			//extract data from compiler
 			long userId = json.getLong("user_id");
-			long solutionId = json.getLong("solution_id");
+			//long solutionId = json.getLong("solution_id"); <--- deleted
+			long taskNumber = json.getLong("task_number");
 			byte[] fileBytes = Base64.getDecoder().decode((String)json.get("file"));
 			InputStream fileStream = new ByteArrayInputStream(fileBytes);
-			long taskNumber = 1;	//simplified
 			String inputString = json.getString("input"); 
 			String outputString = json.getString("output");
 			double timeout = json.getDouble("timeout");
@@ -38,7 +38,8 @@ public class JSONUserAndStats extends JSONTransformer {
 			//save result in database - TODO
 			
 			//save file on the disk
-			String fileName = String.valueOf(userId) + solutionId; 
+			long solutionId = 1; //simplified
+			String fileName = String.valueOf(userId) +"_" +String.valueOf(taskNumber)+"_" +String.valueOf(solutionId); 
 			fileManager.handleFile(fileStream, fileName);
 			
 			//send File to compiler
