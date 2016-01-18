@@ -1,4 +1,4 @@
-package pl.edu.agh.to.team1.fileuploader.server;
+package pl.edu.agh.to.team1.fileuploader.trash;
 
 /*import java.io.IOException;
 import java.io.OutputStream;

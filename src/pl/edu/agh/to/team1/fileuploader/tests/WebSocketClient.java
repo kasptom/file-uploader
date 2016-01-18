@@ -1,4 +1,4 @@
-package pl.edu.agh.to.team1.fileuploader.client_test;
+package pl.edu.agh.to.team1.fileuploader.tests;
 
 import javax.websocket.*;
 

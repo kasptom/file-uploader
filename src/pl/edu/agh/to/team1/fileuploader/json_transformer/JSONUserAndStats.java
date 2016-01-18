@@ -10,7 +10,7 @@ import org.apache.commons.io.IOUtils;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 import pl.edu.agh.to.team1.fileuploader.filemanager.FileManager;
-import pl.edu.agh.to.team1.fileuploader.server.CompilerClient;
+import pl.edu.agh.to.team1.fileuploader.tests.CompilerClient;
 
 
 public class JSONUserAndStats extends JSONTransformer {
