@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import pl.edu.agh.to.team1.fileuploader.server.WebSocketServer;
 import pl.edu.agh.to.team1.fileuploader.tests.TestClient;
 import pl.edu.agh.to.team1.fileuploader.tests.TestCompilerToUploader;
+import pl.edu.agh.to.team1.fileuploader.tests.TestUploaderToUser;
 import pl.edu.agh.to.team1.fileuploader.tests.TestUserToUploader;
 import pl.edu.agh.to.team1.fileuploader.persistence.HibernateUtils;
 
@@ -22,11 +23,12 @@ public class App{
 			String command = bufferedReader.readLine();
 			if (command.startsWith("?"))
 			{
-				System.out.println("'?'      			- print this help");
-				System.out.println("'x'      			- exit FileUploader");
-				System.out.println("'client t1' 		- send text test");
-				System.out.println("'user2uploader' 	- test data transfer from User And Stats to File Uploader");
-				System.out.println("'compiler2uploader' - test data transfer from Compiler to File Uploader");
+				System.out.println("'?'			- print this help");
+				System.out.println("'x'			- exit FileUploader");
+				System.out.println("'client t1'		- send text test");
+				System.out.println("'user2uploader'		- test data transfer from User And Stats to File Uploader");
+				System.out.println("'compiler2uploader'	- test data transfer from Compiler to File Uploader");
+				System.out.println("'uploader2user' 	- test data transfer from File Uploader to User And Stats");
 			}
 			else if (command.equals("client t1"))
 			{
@@ -41,6 +43,11 @@ public class App{
 			else if (command.equals("compiler2uploader"))
 			{
 				TestCompilerToUploader test = new TestCompilerToUploader();
+				test.testIt();
+			}
+			else if (command.equals("uploader2user"))
+			{
+				TestUploaderToUser test = new TestUploaderToUser();
 				test.testIt();
 			}
 			else if (command.startsWith("x"))

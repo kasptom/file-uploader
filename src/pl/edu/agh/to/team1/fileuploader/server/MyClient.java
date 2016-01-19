@@ -1,4 +1,4 @@
-package pl.edu.agh.to.team1.fileuploader.tests;
+package pl.edu.agh.to.team1.fileuploader.server;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -15,10 +15,10 @@ import javax.websocket.Session;
 import org.apache.commons.io.IOUtils;
 import org.glassfish.tyrus.client.ClientManager;
 
-public class CompilerClient{
+public class MyClient{
     private CountDownLatch messageLatch;
 
-    public void sendJSON(InputStream stream){
+    public void sendJSON(InputStream stream, String websocketAddress){
         try {
             messageLatch = new CountDownLatch(1);
             final ClientEndpointConfig cec = ClientEndpointConfig.Builder.create().build();

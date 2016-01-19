@@ -10,12 +10,12 @@ import org.apache.commons.io.IOUtils;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 import pl.edu.agh.to.team1.fileuploader.filemanager.FileManager;
-import pl.edu.agh.to.team1.fileuploader.tests.CompilerClient;
+import pl.edu.agh.to.team1.fileuploader.server.MyClient;
 
 
 public class JSONUserAndStats extends JSONTransformer {
 	private FileManager fileManager = new FileManager();
-	private CompilerClient compilerClient = new CompilerClient();
+	private MyClient compilerClient = new MyClient();
 	
 	
 	@SuppressWarnings("unused")
@@ -45,8 +45,8 @@ public class JSONUserAndStats extends JSONTransformer {
 			//send File to compiler 
 			JSONObject jsonToCompiler = this.createJSONToCompiler(solutionId, (String)json.get("file"), inputString, outputString, timeout);
 			InputStream jsonStream = new ByteArrayInputStream(jsonToCompiler.toString().getBytes());
-			
-			//compilerClient.sendJSON(jsonStream);	//uncomment if compiler is ready
+			//String compilerWebSocketAddress = "ws://<host-address-of-compiler>:<port-on-compiler>/<...>"; //uncomment if compiler is ready
+			//compilerClient.sendJSON(jsonStream, compilerWebSocketAddress);								//uncomment if compiler is ready
 			
 		} catch (IOException e) {
 			e.printStackTrace();
