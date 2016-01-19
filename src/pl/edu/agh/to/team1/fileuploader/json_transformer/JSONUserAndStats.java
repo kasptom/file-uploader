@@ -15,6 +15,7 @@ import pl.edu.agh.to.team1.fileuploader.server.MyClient;
 
 public class JSONUserAndStats extends JSONTransformer {
 	private FileManager fileManager = new FileManager();
+	@SuppressWarnings("unused")
 	private MyClient compilerClient = new MyClient();
 	
 	

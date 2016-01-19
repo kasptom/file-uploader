@@ -2,12 +2,10 @@ package pl.edu.agh.to.team1.fileuploader.tests;
 
 
 import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.nio.ByteBuffer;
-import java.util.Base64;
 import java.util.concurrent.CountDownLatch;
 
 import javax.websocket.ClientEndpointConfig;
