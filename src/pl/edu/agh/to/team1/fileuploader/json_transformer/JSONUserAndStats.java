@@ -9,21 +9,24 @@ import org.apache.commons.io.IOUtils;
 
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
+import pl.edu.agh.to.team1.fileuploader.db.DBManager;
 import pl.edu.agh.to.team1.fileuploader.filemanager.FileManager;
+import pl.edu.agh.to.team1.fileuploader.main.ConfigManager;
 import pl.edu.agh.to.team1.fileuploader.server.MyClient;
 
 
 public class JSONUserAndStats extends JSONTransformer {
 	private FileManager fileManager = new FileManager();
-	@SuppressWarnings("unused")
 	private MyClient compilerClient = new MyClient();
-	
+	private String compilerWebSocketAddress = "ws://<host-address-of-compiler>:<port-on-compiler>/<...>";
+	private DBManager manager = new DBManager();
 	
 	@SuppressWarnings("unused")
 	public void handleStream(InputStream inputStream){
 		//create JSONObject from stream
 		
 		try {
+			ConfigManager confManager = new ConfigManager();
 			String jsonTxt = IOUtils.toString(inputStream);
 			JSONObject json = (JSONObject) JSONSerializer.toJSON(jsonTxt);
 			//extract data from compiler
@@ -44,9 +47,10 @@ public class JSONUserAndStats extends JSONTransformer {
 			fileManager.handleFile(fileStream, fileName);
 			
 			//send File to compiler 
+			compilerWebSocketAddress = confManager.getValue("COM_WSC");
+			System.out.println(compilerWebSocketAddress);
 			JSONObject jsonToCompiler = this.createJSONToCompiler(solutionId, (String)json.get("file"), inputString, outputString, timeout);
 			InputStream jsonStream = new ByteArrayInputStream(jsonToCompiler.toString().getBytes());
-			//String compilerWebSocketAddress = "ws://<host-address-of-compiler>:<port-on-compiler>/<...>"; //uncomment if compiler is ready
 			//compilerClient.sendJSON(jsonStream, compilerWebSocketAddress);								//uncomment if compiler is ready
 			
 		} catch (IOException e) {

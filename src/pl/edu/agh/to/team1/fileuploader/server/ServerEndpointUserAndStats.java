@@ -39,9 +39,10 @@ public class ServerEndpointUserAndStats {
 	}*/
 	@OnMessage
 	public void handleMessage(InputStream stream, Session session) {
-		jsonUserAndStats.handleStream(stream);	// 
+		
 		System.out.println("USER AND STATS ENDPOINT: received input stream: " + stream.toString());
-		//	fileManager.handleFile((InputStream)stream, "user-test-file.json");
+		jsonUserAndStats.handleStream(stream);	// 
+		//fileManager.handleFile(stream, "user-test-file.json");
 	}
 	
 	@OnError

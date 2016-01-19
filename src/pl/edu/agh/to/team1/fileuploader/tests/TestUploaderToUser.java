@@ -4,10 +4,12 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
 import net.sf.json.JSONObject;
+import pl.edu.agh.to.team1.fileuploader.main.ConfigManager;
 import pl.edu.agh.to.team1.fileuploader.server.MyClient;
 
 public class TestUploaderToUser {
 	private MyClient userAndStatsClient = new MyClient();
+	private ConfigManager confManager = new ConfigManager(); 
 	private String userAndStatsWebSocketAddress = "ws://<host-address-of-user-and-stats>:<port-on-user-and-stats>/<...>";
 	private InputStream jsonStream = null;
 	private JSONObject jsonToUserAndStats = null;
@@ -16,6 +18,7 @@ public class TestUploaderToUser {
 	public void testIt(){
 		jsonToUserAndStats = createJSONToUserAndStats();
 		jsonStream = new ByteArrayInputStream(jsonToUserAndStats.toString().getBytes());
+		userAndStatsWebSocketAddress = confManager.getValue("USR_WSC");
 		userAndStatsClient.sendJSON(jsonStream, userAndStatsWebSocketAddress);								//uncomment if compiler is ready
 	}
 	

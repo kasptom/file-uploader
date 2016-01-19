@@ -1,4 +1,5 @@
 package pl.edu.agh.to.team1.fileuploader.json_transformer;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -7,16 +8,17 @@ import org.apache.commons.io.IOUtils;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 import pl.edu.agh.to.team1.fileuploader.db.DBManager;
+import pl.edu.agh.to.team1.fileuploader.main.ConfigManager;
+import pl.edu.agh.to.team1.fileuploader.server.MyClient;
 
   
 
 public class JSONCompiler extends JSONTransformer{
-	@SuppressWarnings("unused")
-	private JSONUserAndStats jsonUserAndStats = new JSONUserAndStats();
-	@SuppressWarnings("unused")
 	private DBManager dbManager = new DBManager();
+	ConfigManager confManager = new ConfigManager();
+	private MyClient userAndStatsClient = new MyClient();
+	private String userAndStatsWebSocketAddress = "ws://<host-address-of-user-and-stats>:<port-on-user-and-stats>/<...>"; 
 	
-	@SuppressWarnings("unused")
 	public void handleStream(InputStream inputStream){
 		//create JSONObject from stream
 		
@@ -24,19 +26,42 @@ public class JSONCompiler extends JSONTransformer{
 			String jsonTxt = IOUtils.toString(inputStream);
 			JSONObject json = (JSONObject) JSONSerializer.toJSON(jsonTxt);
 			//extract data from compiler
-			String solutionId = json.getString("solution_id");
+			long solutionId = json.getLong("solution_id");
 			String resultType = json.getString("result_type");
 			double resultValue = json.getDouble("result_value");
 			//process data
 			//save result in database
 			
 			
+			//
+			long userId = 1;
+			long taskNumber = 1;
+			//send data to UserAndStats
+			JSONObject jsonToUserAndStats = createJSONToUserAndStats(userId, solutionId, taskNumber, resultType, resultValue);
+			new ByteArrayInputStream(jsonToUserAndStats.toString().getBytes());
+			System.out.println("sedning data from Compiler to User and Stats");
+			userAndStatsWebSocketAddress = confManager.getValue("USR_WSC");
+			System.out.println(userAndStatsWebSocketAddress);
+			//userAndStatsClient.sendJSON(inputStream, userAndStatsWebSocketAddress); //uncomment if ready	
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	private JSONObject createJSONToUserAndStats(long userId, long solutionId, long taskNumber, String resultType, double resultValue){
+		JSONObject obj = new JSONObject();
+	    obj.put("user_id", userId);
+		obj.put("solution_id", solutionId);
+		obj.put("task_number", taskNumber);
+		obj.put("result_type", resultType);
+		obj.put("result_value", resultValue);
+		return obj;
+	}
 }
+
+
 
 /*
 	//za Piotrkiem

@@ -1,0 +1,2 @@
+USR_WSC = ws://hostname:3000
+COM_WSC = ws://<host-address-of-compiler>:<port-on-compiler>/<...>

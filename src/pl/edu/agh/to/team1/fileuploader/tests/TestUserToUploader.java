@@ -59,7 +59,7 @@ public class TestUserToUploader {
 		InputStream fileStream;
 		JSONObject obj = new JSONObject();
 		try {
-			fileStream = new FileInputStream("TMP/HelloWorld.c");
+			fileStream = new FileInputStream("file-uploader/HelloWorld.c");
 			byte arrayToEncode[];
 			arrayToEncode = IOUtils.toByteArray(fileStream);
 		

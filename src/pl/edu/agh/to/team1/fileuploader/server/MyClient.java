@@ -41,9 +41,9 @@ public class MyClient{
                         e.printStackTrace();
                     }
                 }
-            }, cec, new URI("ws://<host-address-of-compiler>:<port-on-compiler>/<...>"));
+            }, cec, new URI(websocketAddress));
          
-            messageLatch.await(100, TimeUnit.SECONDS);
+            messageLatch.await(5, TimeUnit.SECONDS);
         } catch (Exception e) {
             e.printStackTrace();
         }

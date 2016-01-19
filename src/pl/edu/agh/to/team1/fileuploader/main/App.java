@@ -12,10 +12,12 @@ import pl.edu.agh.to.team1.fileuploader.tests.TestUserToUploader;
 import pl.edu.agh.to.team1.fileuploader.persistence.HibernateUtils;
 
 public class App{
+	
 	public static void main(String[] args) throws IOException {
 		HibernateUtils.getSession().close();
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 		WebSocketServer webSocketServer = new WebSocketServer();
+		ConfigManager confManager = new ConfigManager();
 		webSocketServer.start();
 		
 		while(true){
@@ -29,6 +31,21 @@ public class App{
 				System.out.println("'user2uploader'		- test data transfer from User And Stats to File Uploader");
 				System.out.println("'compiler2uploader'	- test data transfer from Compiler to File Uploader");
 				System.out.println("'uploader2user' 	- test data transfer from File Uploader to User And Stats");
+				System.out.println("'change-key KEY VAL' 	- change value 'VAL' related to 'KEY'");
+				System.out.println("'find-value KEY' 	- find value related to 'KEY'");
+			}
+			else if (command.startsWith("change-key"))
+			{
+				String[] values = command.split("\\s+");
+				confManager.setValue(values[1], values[2]);
+			}
+			else if (command.startsWith("find-value"))
+			{
+				
+				String[] values = command.split("\\s+");
+				System.out.println("KEY= "+values[1]);
+				String value = confManager.getValue(values[1].trim());
+				System.out.println(value);
 			}
 			else if (command.equals("client t1"))
 			{

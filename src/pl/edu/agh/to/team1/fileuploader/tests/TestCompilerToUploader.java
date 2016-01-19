@@ -57,7 +57,7 @@ public class TestCompilerToUploader {
 	
 	private JSONObject prepareJSONForFileUploader(){
 		long userID = 1;
-		String solutionID = "1_1_1";
+		long solutionID = 1;
 		long taskNumber = 1;
 		String resultType = "OK";
 		double resultValue = 0.01;

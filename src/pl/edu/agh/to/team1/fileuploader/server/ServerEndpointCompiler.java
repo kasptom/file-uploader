@@ -40,9 +40,9 @@ public class ServerEndpointCompiler {
 	}*/
 	@OnMessage
 	public void handleMessage(InputStream stream, Session session) {
-		//jsonCompiler.handleStream(stream);	//uncomment 
-			System.out.println("COMPILER ENDPOINT: received input stream: " + stream.toString());
-			fileManager.handleFile((InputStream)stream, "compiler-test-file.json");
+		System.out.println("COMPILER ENDPOINT: received input stream: " + stream.toString());    
+		jsonCompiler.handleStream(stream);	//uncomment 
+		//fileManager.handleFile(stream, "compiler-test-file.json");
 	}
 	@OnError
 	public void onError(Throwable t){
