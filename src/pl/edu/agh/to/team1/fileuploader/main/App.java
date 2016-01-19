@@ -27,7 +27,7 @@ public class App{
 			{
 				System.out.println("'?'			- print this help");
 				System.out.println("'x'			- exit FileUploader");
-				System.out.println("'client t1'		- send text test");
+				//System.out.println("'client t1'		- send text test");
 				System.out.println("'user2uploader'		- test data transfer from User And Stats to File Uploader");
 				System.out.println("'compiler2uploader'	- test data transfer from Compiler to File Uploader");
 				System.out.println("'uploader2user' 	- test data transfer from File Uploader to User And Stats");
@@ -47,11 +47,11 @@ public class App{
 				String value = confManager.getValue(values[1].trim());
 				System.out.println(value);
 			}
-			else if (command.equals("client t1"))
+			/*else if (command.equals("client t1"))
 			{
 				TestClient client = new TestClient();
 				client.start();
-			}
+			}*/
 			else if (command.equals("user2uploader"))
 			{
 				TestUserToUploader test = new TestUserToUploader();
