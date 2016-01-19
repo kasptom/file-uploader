@@ -28,11 +28,22 @@ public class ServerEndpointUserAndStats {
         return message;
     }*/
 	
+	/*@OnMessage
+	public void handleMessage(Object stream, Session session) {
+		if(stream instanceof String){
+			System.out.println("USER AND STATS ENDPOINT: received message: "+ stream);
+		}else if(stream instanceof InputStream){
+			System.out.println("USER AND STATS ENDPOINT: received input stream");
+			fileManager.handleFile((InputStream)stream, "user-test-file.json");
+		}
+	}*/
 	@OnMessage
 	public void handleMessage(InputStream stream, Session session) {
-		System.out.println("USER AND STATS ENDPOINT: received message: "+ stream.toString());	
-		fileManager.handleFile(stream, "user-test-file.json");
+		jsonUserAndStats.handleStream(stream);	// 
+		System.out.println("USER AND STATS ENDPOINT: received input stream: " + stream.toString());
+		//	fileManager.handleFile((InputStream)stream, "user-test-file.json");
 	}
+	
 	@OnError
 	public void onError(Throwable t){
 		t.printStackTrace();

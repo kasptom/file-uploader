@@ -42,29 +42,18 @@ public class JSONUserAndStats extends JSONTransformer {
 			String fileName = String.valueOf(userId) +"_" +String.valueOf(taskNumber)+"_" +String.valueOf(solutionId); 
 			fileManager.handleFile(fileStream, fileName);
 			
-			//send File to compiler
-			JSONObject jsonToCompiler = this.createJSONToCompiler(solutionId, (Base64)json.get("file"), inputString, outputString, timeout);
+			//send File to compiler 
+			JSONObject jsonToCompiler = this.createJSONToCompiler(solutionId, (String)json.get("file"), inputString, outputString, timeout);
 			InputStream jsonStream = new ByteArrayInputStream(jsonToCompiler.toString().getBytes());
 			
-			compilerClient.sendJSON(jsonStream);
+			//compilerClient.sendJSON(jsonStream);	//uncomment if compiler is ready
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	@SuppressWarnings("unused")
-	private JSONObject createJSONFromCompiler(long userID, String solutionID, long taskNumber,String resultType, double resultValue){
-		JSONObject obj = new JSONObject();
-		obj.put("user_id", userID);
-		obj.put("solution_id", solutionID);
-		obj.put("task_number", taskNumber);
-		obj.put("result_type", resultType);
-		obj.put("result_value", resultValue);
-		return obj;
-	}
-	
-	private JSONObject createJSONToCompiler(long solutionId, Base64 fileBase64, String input, String output, double timeout){
+	private JSONObject createJSONToCompiler(long solutionId, String fileBase64, String input, String output, double timeout){
 		JSONObject obj = new JSONObject();
 		obj.put("solution_id", solutionId);
 		obj.put("file", fileBase64);

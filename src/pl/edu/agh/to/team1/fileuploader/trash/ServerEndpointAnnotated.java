@@ -1,4 +1,4 @@
-package pl.edu.agh.to.team1.fileuploader.server;
+package pl.edu.agh.to.team1.fileuploader.trash;
 
 import java.io.InputStream;
 
@@ -27,9 +27,13 @@ public class ServerEndpointAnnotated {
     }*/
 	
 	@OnMessage
-	public void handleMessage(InputStream stream, Session session) {
-		System.out.println("SERVER: received message: "+ stream.toString());
-		fileManager.handleFile(stream, "test.json");
+	public void handleMessage(Object stream, Session session) {
+		if(stream instanceof InputStream){
+			System.out.println("SERVER: received input stream");
+			fileManager.handleFile((InputStream)stream, "test.json");
+		}else if(stream instanceof String){
+			System.out.println("SERVER: received text message: "+ stream);
+		}
 	}
 	@OnError
 	public void onError(Throwable t){
